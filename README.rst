@@ -32,6 +32,7 @@ New Changes
    * curl --output - https://download.site/file.iso 2>/dev/null | python speedometer.py 
 
 5. Exports instant bitrate to MQTT server using "-q IP", so you can use values in home assistant for assistant
+
    * python speedometer.py -q 192.168.1.10
 
 
