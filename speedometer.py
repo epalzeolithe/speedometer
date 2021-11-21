@@ -13,7 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
 
-__version__ = "3.2"
+__version__ = "3.3"
 
 import time
 import sys
@@ -520,7 +520,7 @@ def readable_speed(speed):
 
     if speed == None or speed < 0: speed = 0
 
-    units = "B/s  ", "KiB/s", "MiB/s", "GiB/s", "TiB/s"
+    units = "B/s  ", "KB/s", "MB/s", "GB/s", "TB/s"
     step = long(1)
 
     for u in units:
@@ -546,7 +546,7 @@ def readable_speed_bits(speed):
     if speed == None or speed < 0: speed = 0
 
     speed = speed * 8
-    units = "b/s  ", "Kib/s", "Mib/s", "Gib/s", "Tib/s"
+    units = "b/s  ", "Kbps", "Mbps", "Gbps", "Tbps"
     step = long(1)
 
     for u in units:
