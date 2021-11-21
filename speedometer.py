@@ -13,7 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
 
-__version__ = "2.9"
+__version__ = "3.0"
 
 import time
 import sys
@@ -26,6 +26,10 @@ import six
 import threading
 import subprocess
 import select
+import paho.mqtt.publish as publish
+
+
+
 
 __usage__ = """Usage: speedometer [options] tap [[-c] tap]...
 Monitor network traffic or speed/progress of a file transfer.  At least one
@@ -38,6 +42,7 @@ Taps:
   -t network-interface        display bytes transmitted on network-interface
   -d command                  display bytes received from running shell command standard output
   -c                          start a new column for following tap arguments
+  -q host                     send stats to MQTT server
 
 Options:
   -b                          use old blocky display instead of smoothed
@@ -72,6 +77,9 @@ Urwid may be installed system-wide or in the same directory as speedometer.
 
 INITIAL_DELAY = 0.5 # seconds
 INTERVAL_DELAY = 1.0 # seconds
+
+global SERVER_MQTT
+SERVER_MQTT = "10.0.0.1"
 
 VALID_NUM_COLORS = (1, 16, 88, 256)
 
@@ -366,6 +374,10 @@ class GraphDisplay(urwid.WidgetWrap):
             [speed_scale(c),0],
             [0,speed_scale(a)],
             ], graph_range())
+
+        publish.single("speedometer/speed", readable_speed(s), hostname=SERVER_MQTT)
+        publish.single("speedometer/rawspeed", s, hostname=SERVER_MQTT)
+
 
 
 
@@ -1089,6 +1101,7 @@ def parse_args():
     shiny_colors = None
     cols = []
     taps = []
+    global SERVER_MQTT
     isatty = False
 
     def push_tap(tap, taps):
@@ -1116,7 +1129,7 @@ def parse_args():
         if op in ("-h","--help"):
             raise ArgumentError
 
-        elif op in ("-d", "-i", "-r", "-rx", "-t", "-tx", "-f", "-k", "-m", "-n"):
+        elif op in ("-d", "-i", "-r", "-rx", "-t", "-tx", "-f", "-k", "-m", "-n", "-q"):
             # combine two part arguments with the following argument
             try:
                 if op != "-f": # keep support for -f being optional
@@ -1226,6 +1239,9 @@ def parse_args():
         elif op.startswith("-t"):
             push_tap(tap, taps)
             tap = NetworkTap("TX", op[2:])
+
+        elif op.startswith("-q"):
+            SERVER_MQTT = op[2:]
 
         elif op == "-c":
             push_tap(tap, taps)
