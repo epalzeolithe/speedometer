@@ -11,7 +11,7 @@ Measure and display the rate of data across a network connection or data being s
 New Changes
 ------------
 
-0. Exports instant bitrate to mqtt server using "-q ip" 
+0. Exports instant bitrate to MQTT server using "-q ip", so you can use values in home assistant for assistant
 
 1. Python 2.7, 3 is supported now, mac os x platform is included.
 
