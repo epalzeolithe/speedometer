@@ -1,5 +1,5 @@
-Speedometer
-===========
+Speedometer 3.0
+===============
 
 Fork from <https://github.com/wardi/speedometer>
 
@@ -10,6 +10,8 @@ Measure and display the rate of data across a network connection or data being s
 
 New Changes
 ------------
+
+0. Exports instant bitrate to mqtt server using "-q ip" 
 
 1. Python 2.7, 3 is supported now, mac os x platform is included.
 
