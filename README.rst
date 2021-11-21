@@ -1,4 +1,4 @@
-Speedometer 3.0
+Speedometer 3.2
 ===============
 
 Fork from <https://github.com/wardi/speedometer>
