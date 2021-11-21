@@ -1,7 +1,7 @@
 Speedometer 3.2
 ===============
 
-Fork from <https://github.com/wardi/speedometer>
+Fork from https://github.com/kenduest/speedometer
 
 Measure and display the rate of data across a network connection or data being stored in a file.
 
