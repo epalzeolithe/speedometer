@@ -11,8 +11,6 @@ Measure and display the rate of data across a network connection or data being s
 New Changes
 ------------
 
-0. Exports instant bitrate to MQTT server using "-q ip", so you can use values in home assistant for assistant
-
 1. Python 2.7, 3 is supported now, mac os x platform is included.
 
 2. Use python `psutil` module, instead of /dev/net for maximal compatibility.
@@ -32,6 +30,9 @@ New Changes
    * python speedometer.py < /dev/urandom 
 
    * curl --output - https://download.site/file.iso 2>/dev/null | python speedometer.py 
+
+5. Exports instant bitrate to MQTT server using "-q IP", so you can use values in home assistant for assistant
+   * python speedometer.py -q 192.168.1.10
 
 
 Screen Shots
