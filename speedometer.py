@@ -13,7 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
 
-__version__ = "3.0"
+__version__ = "3.1"
 
 import time
 import sys
@@ -79,7 +79,7 @@ INITIAL_DELAY = 0.5 # seconds
 INTERVAL_DELAY = 1.0 # seconds
 
 global SERVER_MQTT
-SERVER_MQTT = "10.0.0.1"
+SERVER_MQTT = "off"
 
 VALID_NUM_COLORS = (1, 16, 88, 256)
 
@@ -375,8 +375,9 @@ class GraphDisplay(urwid.WidgetWrap):
             [0,speed_scale(a)],
             ], graph_range())
 
-        publish.single("speedometer/speed", readable_speed(s), hostname=SERVER_MQTT)
-        publish.single("speedometer/rawspeed", s, hostname=SERVER_MQTT)
+        if SERVER_MQTT!="off":
+            publish.single("speedometer/speed", readable_speed(s), hostname=SERVER_MQTT)
+            publish.single("speedometer/rawspeed", s, hostname=SERVER_MQTT)
 
 
 
