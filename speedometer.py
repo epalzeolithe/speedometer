@@ -13,7 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
 
-__version__ = "3.1"
+__version__ = "3.2"
 
 import time
 import sys
